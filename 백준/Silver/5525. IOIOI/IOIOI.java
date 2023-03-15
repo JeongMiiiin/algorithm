@@ -9,24 +9,25 @@ import java.io.InputStreamReader;
 */
 public class Main {
 	static int N, M, ans = 0;
+	static char[] answer, s;
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
 		M = Integer.parseInt(br.readLine());
-		char[] s = br.readLine().toCharArray();
 		
-		for(int i=0; i < M - (N * 2); i++) if(s[i] == 'I') find(s, i);
+		answer = new char[N * 2 + 1];
+		for(int i=0; i  < N * 2 + 1; i++) {
+			if(i % 2 == 0) answer[i] = 'I';
+			else answer[i] = 'O';
+		}
+		s = br.readLine().toCharArray();
+		
+		for(int i=0; i < M - (N * 2); i++) if(s[i] == 'I') find(i);
 		
 		System.out.println(ans);
 	}
-	private static void find(char[] s, int start) {
-		boolean flag = true;
-		for(int i=1; i <= N * 2; i++) {
-			if(i % 2 == 0 && s[start + i] == 'I') continue;
-			else if(i % 2 == 1 && s[start + i] == 'O') continue;
-			return;
-		}
-		if(flag) ans++;
-		
+	private static void find(int start) {
+		for(int i=0; i < N * 2 + 1; i++) if(answer[i] != s[start + i]) return;
+		ans++;
 	}
 }
