@@ -1,4 +1,5 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 /*
  * 백준 5525 - IOIOI
@@ -9,19 +10,16 @@ import java.util.Scanner;
 public class Main {
 	static int N, M, ans = 0;
 	static boolean[] visited;
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		N = sc.nextInt();
-		M = sc.nextInt();
-		sc.nextLine();
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		N = Integer.parseInt(br.readLine());
+		M = Integer.parseInt(br.readLine());
 		visited = new boolean[M];
-		char[] s = sc.nextLine().toCharArray();
+		char[] s = br.readLine().toCharArray();
 		
 		for(int i=0; i < M - (N * 2); i++) if(s[i] == 'I' && !visited[i]) find(s, i);
 		
 		System.out.println(ans);
-		
-		sc.close();
 	}
 	private static void find(char[] s, int start) {
 		visited[start] = true;
