@@ -9,29 +9,22 @@ import java.io.InputStreamReader;
 */
 public class Main {
 	static int N, M, ans = 0;
-	static boolean[] visited;
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
 		M = Integer.parseInt(br.readLine());
-		visited = new boolean[M];
 		char[] s = br.readLine().toCharArray();
 		
-		for(int i=0; i < M - (N * 2); i++) if(s[i] == 'I' && !visited[i]) find(s, i);
+		for(int i=0; i < M - (N * 2); i++) if(s[i] == 'I') find(s, i);
 		
 		System.out.println(ans);
 	}
 	private static void find(char[] s, int start) {
-		visited[start] = true;
-		if(s[start + 1] == 'I') return;
-		
-		visited[start + 1] = true;
 		boolean flag = true;
-		for(int i=2; i <= N * 2; i++) {
+		for(int i=1; i <= N * 2; i++) {
 			if(i % 2 == 0 && s[start + i] == 'I') continue;
 			else if(i % 2 == 1 && s[start + i] == 'O') continue;
-			flag = false;
-			break;
+			return;
 		}
 		if(flag) ans++;
 		
