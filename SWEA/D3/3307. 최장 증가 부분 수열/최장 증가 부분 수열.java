@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -24,10 +23,10 @@ public class Solution {
 			
 			int ans = 0;
 			for(int i=0; i < N; i++) {
-				int temp = Arrays.binarySearch(LIS, 0, ans, arr[i]);
-				temp = Math.abs(temp) - 1;
-				LIS[temp] = arr[i];
-				if(ans == temp) ans++;
+				LIS[i] = 1;
+				for(int j=0; j < i; j++) if(arr[j] < arr[i] && LIS[i] < LIS[j] + 1) LIS[i] = LIS[j] + 1;
+				
+				if(ans < LIS[i]) ans = LIS[i];
 			}
 			
 			System.out.println("#" + t + " " + ans);
