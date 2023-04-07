@@ -1,42 +1,79 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
+/*
+ * 백준 11659 - 구간 합 구하기 4
+ * 
+ * 주어지는 값
+ * N : 수의 개수
+ * M : 구간의 합을 구하는 횟수
+ * 둘째줄  : N개의 수의 값
+ * 3 ~ (M + 1)번째 줄 : 구하고자 하는 구간에 대한 정보
+ * a : 시작구간
+ * b : 종료구간 
+ * 
+ * N개의 수가 주어짐. 어떤 부분의 합을 구하려 한다.
+*/
+
 public class Main {
-	/*
-	 * BOJ 11659
-	 * 주어지는 값
-	 * 첫째줄 -> N : 수의 개수, M : 합을 구해야 하는 횟수
-	 * 둘째줄 -> N개의 수
-	 * M개의 줄 -> 합을 구해야 하는 구간 i j
-	*/
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-	static StringTokenizer st;
-	
-	public static void main(String[] args) throws Exception{
-		st = new StringTokenizer(br.readLine()); 
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 		
-		int[] inputs = new int[N + 1];
+		long[] origin = new long[N + 1];
+		FenwickTree tree = new FenwickTree(N + 1);
 		
-		st = new StringTokenizer(br.readLine());
-		inputs[1] = Integer.parseInt(st.nextToken());
-		for(int i=2; i <= N; i++)
-			inputs[i] = inputs[i - 1] + Integer.parseInt(st.nextToken());
-
-        for (int i = 0; i < M; i++) {
-            st = new StringTokenizer(br.readLine());
-            int start = Integer.parseInt(st.nextToken());
-            int end = Integer.parseInt(st.nextToken());
-            int result = inputs[end] - inputs[start - 1];
-            bw.write(result + "\n");
-        }
-        bw.flush();
-        bw.close();
-				
+		st = new StringTokenizer(br.readLine(), " ");
+		//업데이트
+		for(int i=1; i <= N; i++) {
+			origin[i] = Integer.parseInt(st.nextToken());
+			tree.update(i, origin[i]);
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		//변경 혹은 구간 합 구하기
+		int a, b;
+		for(int i=0; i < M; i++) {
+			st = new StringTokenizer(br.readLine(), " ");
+			a = Integer.parseInt(st.nextToken());
+			b = Integer.parseInt(st.nextToken());
+			sb.append(tree.getRange(a, b) + "\n");
+		}
+		
+		System.out.println(sb.toString());
+		br.close();
 	}
+	
+	static class FenwickTree {
+		public long[] data;
+ 
+		public FenwickTree(int n) {
+			data = new long[n];
+		}
+		
+		public void update(int idx, long value) {
+			while(idx < data.length) {
+				data[idx] += value;
+				idx += (idx & -idx);
+			}
+		}
+		
+		public long sum(int idx) {
+			long result = 0;
+			while(idx > 0) {
+				result += data[idx];
+				idx -= (idx & -idx);
+			}
+			return result;
+		}
+		
+		public long getRange(int start, int end) {
+			return sum(end) - sum(start - 1);
+		}
+	}
+	
 }
