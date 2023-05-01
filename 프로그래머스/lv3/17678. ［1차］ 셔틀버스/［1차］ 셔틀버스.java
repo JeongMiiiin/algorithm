@@ -45,8 +45,9 @@ class Solution {
 					}
 				}
 				
-				if(minCnt == m) answer = changeTimeFromIntToString(minTime - 1);
-				else if(cnt == m) answer = changeTimeFromIntToString(minTime - 1);
+				//최소시간으로 모든 인원을 다 채운 경우
+				if(cnt == m) answer = changeTimeFromIntToString(minTime - 1);
+				//둘 다 아닌 경우
 				else answer = changeTimeFromIntToString(minTime);
 			}
 			
