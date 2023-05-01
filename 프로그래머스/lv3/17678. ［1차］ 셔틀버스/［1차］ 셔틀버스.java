@@ -28,18 +28,13 @@ class Solution {
 				answer = changeTimeFromIntToString(shuttle);
 				continue;
 			} else { //현재 셔틀버스의 시간보다 같거나 빠를 때
-				int minCnt = 1;
 				int minTime = crew.poll();
 				int cnt = 1;
 				while(cnt < m && !crew.isEmpty()) {
 					if(shuttle < crew.peek()) break;
 					else {
 						int nextCrew = crew.poll();
-						if(nextCrew == minTime) minCnt++;
-						else {
-							minTime = nextCrew;
-							minCnt = 1;
-						}
+						if(nextCrew != minTime) minTime = nextCrew;
 						
 						cnt++;
 					}
