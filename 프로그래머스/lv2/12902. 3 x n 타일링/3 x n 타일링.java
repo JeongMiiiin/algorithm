@@ -10,8 +10,7 @@
 class Solution {
     public int solution(int n) {
         int answer = 0;
-        if (n % 2 == 1) return answer;
-
+        if(n % 2 == 1) return answer;
         long[] dp = new long[n + 1];
         dp[2] = 3;
         long sum = 0;
