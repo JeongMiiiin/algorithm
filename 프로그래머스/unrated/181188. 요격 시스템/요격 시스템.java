@@ -1,9 +1,4 @@
-import java.util.*;
-
-/*
-요격 시스템
-
-*/
+import java.util.Arrays;
 
 class Solution {
     public int solution(int[][] targets) {
