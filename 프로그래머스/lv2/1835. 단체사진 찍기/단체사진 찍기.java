@@ -39,11 +39,9 @@ class Solution {
     }
     
     private static void perm(int cnt){
-        //조건에 해당하지 않으면 종료
-        if(!check()) return;
-        
         if(cnt == N){
-            answer++;
+            //조건에 해당하면
+            if(check()) answer++;
             return;
         }
         
