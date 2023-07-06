@@ -14,8 +14,10 @@ class Solution {
             return;
         }
         
+        //n - 1 개의 원판을 start -> mid
         hanoi(n - 1, start, end, mid);
         answer.add(new int[]{start, end});
-        hanoi(n -1, mid, start, end);
+        //n - 1 개의 원판을 mid -> end
+        hanoi(n - 1, mid, start, end);
     }
 }
