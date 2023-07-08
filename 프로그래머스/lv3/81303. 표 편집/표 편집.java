@@ -20,7 +20,7 @@ class Solution {
             next[i] = i + 1;
         }
         next[n - 1] = -1;
-        
+
         Stack<Node> rm = new Stack<>();
         StringBuilder answer = new StringBuilder("O".repeat(n));
         for(String s : cmd){
@@ -49,15 +49,15 @@ class Solution {
         }
         return answer.toString();
     }
-    
+
     public class Node{
         int pre, cur, nxt;
-        
+
         public Node(int pre, int cur, int nxt) {
             this.pre = pre;
             this.cur = cur;
             this.nxt = nxt;
         }
     }
-    
+
 }
