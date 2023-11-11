@@ -13,11 +13,12 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
-		int[] roads = new int[N - 1];
+		long[] roads = new long[N - 1];
 		for(int i=0; i < N - 1; i++) roads[i] = sc.nextInt();
 		int[] fuels = new int[N];
 		for(int i=0; i < N; i++) fuels[i] = sc.nextInt();
-		int result = 0, idx = 0, cur = Integer.MAX_VALUE;
+		long result = 0;
+		int idx = 0, cur = Integer.MAX_VALUE;
 		while(idx < N - 1) {
 			if(cur > fuels[idx]) {
 				cur = fuels[idx];
