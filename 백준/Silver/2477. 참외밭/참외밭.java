@@ -1,0 +1,39 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+/*
+ * 백준 2477 - 참외밭
+ * 참외밭에서 참외가 자란다.
+ * 1m 넓이에 자라는 참외의 개수는 구함
+ * 참외밭의 넓이를 구하라
+ * */
+public class Main {
+	public static void main(String[] agrs) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+
+		int sum = 0;
+		int max = Integer.MIN_VALUE;
+		int K = Integer.parseInt(st.nextToken());
+
+		st = new StringTokenizer(br.readLine());
+		st.nextToken();
+
+		int first = Integer.parseInt(st.nextToken());
+		int pre = first;
+
+		for (int i = 1; i < 6; i++) {
+			st = new StringTokenizer(br.readLine());
+			st.nextToken();
+			int cur = Integer.parseInt(st.nextToken());
+			max = Math.max(cur * pre, max);
+			sum += cur * pre;
+			pre = cur;
+		}
+		max = Math.max(pre * first, max);
+		sum += pre * first;
+		System.out.println((sum - max * 2)*K);
+	}
+}
